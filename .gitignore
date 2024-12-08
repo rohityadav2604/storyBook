@@ -2,6 +2,5 @@ node_modules
 demo
 dist/
 build/
-*.config.mjs
 *.pdf
 .env
