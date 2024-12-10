@@ -2,7 +2,7 @@ import { ChatOpenAI } from '@langchain/openai';
 
 async function initializeLLM() {
   try {
-    const llm = new ChatOpenAI({ model: 'gpt-3.5-turbo', temperature: 0 });
+    const llm = new ChatOpenAI({ model: 'gpt-4o', temperature: 0 });
 
     return llm;
 

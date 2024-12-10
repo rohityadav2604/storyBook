@@ -4,8 +4,8 @@ async function splitDocuments(documents) {
 
   try {
     const textSplitter = new RecursiveCharacterTextSplitter({
-      chunkSize: 50,
-      chunkOverlap: 25,
+      chunkSize: 600,
+      chunkOverlap: 100,
     });
 
     const splits = await textSplitter.splitDocuments(documents);
