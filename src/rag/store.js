@@ -1,4 +1,5 @@
-import createVectorStore from '../vectorStore.js';
+import { createVectorStore } from '../utils/createVectorStore.js';
+
 async function storeDocuments(splitDocuments) {
 
   try {
@@ -7,11 +8,11 @@ async function storeDocuments(splitDocuments) {
 
     await vectorStore.addDocuments(splitDocuments);
 
-    return 'vector store created';
+    return { message: 'vector store created' , status: 200};
 
   } catch (error) {
     console.error('error in storing documents' , error);
-
+    throw error;
   }
 }
 

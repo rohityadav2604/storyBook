@@ -1,6 +1,6 @@
 import { RecursiveCharacterTextSplitter } from 'langchain/text_splitter';
 
-async function splitDocuments(documents) {
+async function splitDocuments(documents, documentId) {
 
   try {
     const textSplitter = new RecursiveCharacterTextSplitter({
@@ -9,11 +9,19 @@ async function splitDocuments(documents) {
     });
 
     const splits = await textSplitter.splitDocuments(documents);
+    const splitsWithId = splits.map(split => ({
+      ...split,
+      metadata: {
+        ...split.metadata,
+        documentId,
+      },
+    }));
 
-    return splits;
+    return {data:splitsWithId, status:200};
 
   } catch (error) {
     console.error('error in splitting documents' , error);
+    throw error;
 
   }
 
