@@ -2,6 +2,7 @@ import express from 'express';
 
 import cors from './config/cors.js';
 import router from './routes/index.js';
+
 const app = express();
 
 app.use(express.json());
@@ -14,13 +15,19 @@ app.get('/', (req, res) => {
 });
 
 app.get('/health', (req, res) => {
-  res.send('server is running');
+  res.status(200).json({ status: 'server is running' });
 });
 
-const PORT = process.env.PORT || 4000;
+// Remove app.listen() for Vercel deployment
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
+export default function handler(req, res) {
+  // Handle the request using the Express app
+  return new Promise((resolve, reject) => {
+    app(req, res);
 
-export default app;
+    // Add a timeout to prevent hanging
+    setTimeout(() => {
+      reject(new Error('Request timed out'));
+    }, 10000);
+  });
+}
