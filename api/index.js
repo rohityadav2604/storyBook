@@ -1,3 +1,7 @@
-import handler from '../src/server.js';
+import app from '../src/server.js';
 
-export default handler;
+// Export the Express API as Vercel serverless function
+export default function handler(req, res) {
+  app(req, res);
+}
+

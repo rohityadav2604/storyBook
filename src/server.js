@@ -20,6 +20,4 @@ app.get('/health', (req, res) => {
 
 // Remove app.listen() for Vercel deployment
 
-export default function handler(req, res) {
-  app(req, res);
-}
+export default app;
