@@ -1,7 +1,7 @@
 import app from '../src/server.js';
 
-// Export the Express API as Vercel serverless function
-export default function handler(req, res) {
+export default async function handler(req, res) {
+  await app.ready();
   app(req, res);
 }
 
