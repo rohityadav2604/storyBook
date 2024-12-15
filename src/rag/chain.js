@@ -19,7 +19,7 @@ Context:
   Helpful Answer:
 `);
 
-async function createChain(llm) {
+export async function createChain(llm) {
   try {
     // Create the retrieval-augmented generation (RAG) chain
     const ragChain = await createStuffDocumentsChain({
@@ -35,4 +35,3 @@ async function createChain(llm) {
   }
 }
 
-export default createChain;

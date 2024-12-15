@@ -9,11 +9,11 @@ import uploadFileToDb from '../services/uploadService.js';
 export async function uploadController(req, res) {
   try {
     const { id } = req.body;
-    const { path } = req.file;
+    const { path , originalname , size } = req.file;
     const dbResponse = await uploadFileToDb(id, path);
 
     if (dbResponse.status === 200) {
-      res.status(200).json({ message: 'file uploaded' , status: 200});
+      res.status(200).json({ id: id , name: originalname , size: size , status: 200});
     } else {
       res.status(500).json(dbResponse);
     }

@@ -2,13 +2,9 @@
 export async function retrieveAndAnswer(vectorStore, question, ragChain, options = {}) {
   try {
     // Extract options with defaults
-    const { k = 5, relevanceThreshold = 75 } = options;
 
     // Configure the retriever
-    const retriever = vectorStore.asRetriever({
-      k, // Number of documents to retrieve
-      relevanceThreshold, // Optional: Filter documents by a score threshold (if supported)
-    });
+    const retriever = await vectorStore.asRetriever();
 
     // Retrieve documents based on the question
     const retrievedDocs = await retriever.invoke(question);
@@ -19,21 +15,20 @@ export async function retrieveAndAnswer(vectorStore, question, ragChain, options
       return { error: 'No relevant documents found', data: [] , status: 404 };
     }
 
-    console.log('Retrieved Documents:', retrievedDocs);
+    // const context = retrievedDocs.map((doc) => doc.pageContent).join('\n\n');
 
-    const context = retrievedDocs.map((doc) => doc.text).join('\n\n');
-
+    // console.log(context);
     const response = await ragChain.invoke({
       question,
-      context,
+      context : retrievedDocs,
     });
 
-    return response;
+    return {message: response , status: 200};
 
   } catch (error) {
     console.error('Error during retrieval or RAG processing:', error);
 
-    return { error: 'An error occurred while processing your request', details: error };
+    throw error;
   }
 }
 

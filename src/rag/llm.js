@@ -5,7 +5,7 @@ import { ChatOpenAI } from '@langchain/openai';
  * @returns {Promise<ChatOpenAI>} Configured LLM instance
  * @throws {Error} If initialization fails
  */
-async function initializeLLM() {
+export async function initializeLLM() {
   try {
     // Initialize with production-ready settings
     const llm = new ChatOpenAI({
@@ -22,4 +22,3 @@ async function initializeLLM() {
   }
 }
 
-export default initializeLLM;

@@ -10,7 +10,7 @@ async function uploadFileToDb(documentId , path) {
     const documents = await loadPdf(path);
     const splitDocument = await splitDocuments(documents , documentId);
 
-    const storeResponse = await storeDocuments(splitDocument);
+    const storeResponse = await storeDocuments(splitDocument.data);
 
     if (storeResponse.status === 200) {
       return {message:storeResponse.data , status:storeResponse.status};
