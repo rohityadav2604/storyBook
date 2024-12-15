@@ -13,6 +13,10 @@ app.get('/', (req, res) => {
   res.send('Hello World');
 });
 
+app.get('/health', (req, res) => {
+  res.send('server is running');
+});
+
 const PORT = process.env.PORT || 4000;
 
 app.listen(PORT, () => {
