@@ -21,13 +21,5 @@ app.get('/health', (req, res) => {
 // Remove app.listen() for Vercel deployment
 
 export default function handler(req, res) {
-  // Handle the request using the Express app
-  return new Promise((resolve, reject) => {
-    app(req, res);
-
-    // Add a timeout to prevent hanging
-    setTimeout(() => {
-      reject(new Error('Request timed out'));
-    }, 10000);
-  });
+  app(req, res);
 }
