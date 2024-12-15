@@ -19,9 +19,14 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'server is running' });
 });
 
+const handler = async (req, res) => {
+  return app(req, res);
+};
+
+export default handler;
 // app.listen(PORT, () => {
 //   console.log(`Server is running on port ${PORT}`);
 // });
 // Remove app.listen() for Vercel deployment
 
-export default app;
+// export default app;
